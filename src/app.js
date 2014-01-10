@@ -100,6 +100,26 @@ var Encryptr = (function (window, console, undefined) {
     // ...
   };
 
+  /** Return a new session-unique integer. */
+  Encryptr.prototype.getNewUnique = function() {
+    if (! window.app.session) {
+      throw new Error("Session counter increment attempted without session");
+    }
+    else if (! window.app._uCounter || ! window.app._uCounter.keys.counter) {
+      throw new Error("Session counter not properly established");
+    }
+    window.app._uCounter.keys.counter += 1;
+    window.app._uCounter.save(
+      function (err) {
+        if (err) {
+          // Not a lot we can do.
+          console.log("Failed to save unique counter!");
+        }
+      }
+    );
+    return window.app._uCounter.keys.counter;
+  };
+
   return Encryptr;
 
 })(this, this.console);

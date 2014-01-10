@@ -70,13 +70,25 @@
       return this;
     },
     a_clickHandler: function(event) {
-      var _this = this;
-      if (!$(".menu").hasClass("dismissed") || !$(".addMenu").hasClass("dismissed")) {
+      var _this = this,
+          model = this.model,
+          contents = model.get("contents");
+      if (!$(".menu").hasClass("dismissed") ||
+          !$(".addMenu").hasClass("dismissed")) {
         return;
       }
-      window.app.navigator.pushView(window.app.EntryView, {
-        model: _this.model
-      }, window.app.defaultEffect);
+      if (contents) {
+        window.app.navigator.pushView(
+          window.app.EntriesView,
+          {collection: contents},
+          window.app.noEffect
+        );
+      }
+      else {
+        window.app.navigator.pushView(window.app.EntryView, {
+          model: _this.model
+        }, window.app.defaultEffect);
+      }
     },
     close: function() {
       this.remove();

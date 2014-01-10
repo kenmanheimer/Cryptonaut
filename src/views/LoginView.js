@@ -64,15 +64,36 @@
           passphrase: passphrase,
           session: session
         });
-        window.app.session.load("entries", function(err, entries) {
+        session.load("entries", function(err, entries) {
           if (err) {
             navigator.notification.alert(err);
             $(".blocker").hide();
             return;
           }
+          // Get the session-unique counter, and initialize it if necessary.
+          // It's for internal use by .getNewUnique().
+          window.cryptonutils.loadOrCreateContainer(
+            "_uCounter",
+            session,
+            function (container) {
+              window.app._uCounter = container;
+              window.cryptonutils.getOrCreateSetting(
+                container,
+                "counter",
+                1,
+                function (setting) {},
+                function (errmsg) {
+                  console.log("Failed to set unique counter: " + errmsg);
+                }
+              );
+            },
+            function (errmsg) {
+              console.log("Failed to establish unique counter: " + errmsg);
+            }
+          );
           // Set up MainView
           window.app.mainView = new window.app.MainView().render();
-          // Push a ListView 
+          // Push a ListView
           window.app.navigator.pushView(
             window.app.EntriesView,
             { collection: new window.app.EntriesCollection() },
