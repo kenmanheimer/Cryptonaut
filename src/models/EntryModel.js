@@ -7,7 +7,6 @@
     $         = window.Zepto;
 
   var EntryModel = Backbone.Model.extend({
-    container: "entries"
   });
 
   Encryptr.prototype.EntryModel = EntryModel;

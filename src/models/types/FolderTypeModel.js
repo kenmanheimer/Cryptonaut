@@ -8,14 +8,12 @@
 
   var FolderType = Backbone.Model.extend({
     type: "Folder",
-    contents: null,         // Will initialize with fresh EntriesCollection
+    contents: null,
     initialize: function () {
-      console.log("FolderModel initialize.");
-      if (! this.get("container")) {
-        this.set("container", "folder:" + window.app.getNewUnique());
-      }
-      if (! this.get("contents")) {
-        this.set("contents", new Encryptr.prototype.EntriesCollection());
+      this.modelID = "folder:" + window.app.getNewUnique();
+      if (! this.contents) {
+        this.contents = new Encryptr.prototype.EntriesCollection();
+        this.contents.container = this.modelID;
       }
     },
     which: "FolderType"

@@ -24,11 +24,13 @@
       event.stopPropagation();
       event.preventDefault();
       this.dismiss();
-      var typeModel = $(event.target).data("model");
+      var typeModel = $(event.target).data("model"),
+          model = new window.app.EntryModel(
+            new window.app.types[typeModel]()
+          );
+      model.container = window.app.currentEntriesCollection.container;
       window.app.navigator.pushView(window.app.EditView, {
-        model: new window.app.EntryModel(
-          new window.app.types[typeModel]()
-        )
+        model: model
       }, window.app.defaultEffect);
     },
     dismiss: function() {

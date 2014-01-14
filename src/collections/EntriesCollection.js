@@ -13,11 +13,13 @@
     },
     fetch: function (options) {
       var _this = this;
-      var container = options && options.container || this.container;
+      var container = (options && options.container) || this.container;
       window.app.session.load(container, function(err, entries) {
         _this.set(
           _.map(entries.keys, function(entry, key){
-            return new _this.model(entry);
+            var it = new _this.model(entry);
+            it.container = container;
+            return it;
           })
         );
       });

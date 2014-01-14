@@ -37,10 +37,14 @@
       this.subViews.push(view);
     },
     viewActivate: function(event) {
+      this.priorEntriesCollection = window.app.currentEntriesCollection;
+      window.app.currentEntriesCollection = this.collection;
       this.collection.fetch();
     },
     viewDeactivate: function(event) {
-      // ...
+      // Reestablish prior entries collection. Will be superceded when
+      // another entries view is activated.
+      window.app.currentEntriesCollection = this.priorEntriesCollection;
     },
     close: function() {
       _.each(this.subViews, function(view) {
