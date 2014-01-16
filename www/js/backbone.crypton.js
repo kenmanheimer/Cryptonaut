@@ -53,7 +53,7 @@
           // Should we be calling model.collection.sync?
           return;
         }
-        session.load(container, function(err, entries) {
+        session.load(containerName, function(err, entries) {
           if (err) return errorHandler(err, options);
           entries.get(model[model.idAttribute], function(err, entry) {
             return successHandler(entry);
@@ -61,36 +61,29 @@
         });
         break;
       case "create":
-        window.cryptonutils.loadOrCreateContainer(
-          containerName, session,
-          // Success:
-          function (entries) {
-            var modelId = model.modelID || guid();
-            entries.add(modelId, function(err) {
+        session.load(containerName, function(err, entries) {
+          if (err) return errorHandler(err, options);
+          var modelId = guid();
+          entries.add(modelId, function(err) {
+            if (err) return errorHandler(err, options);
+            entries.get(modelId, function(err, entry) {
               if (err) return errorHandler(err, options);
-              entries.get(modelId, function(err, entry) {
-                if (err) return errorHandler(err, options);
-                entry.container = modelId;
-                var modelData = model.toJSON();
-                modelData[model.idAttribute] = (modelData[model.idAttribute] ||
-                                                modelId);
-                for(var data in modelData) {
-                  if (modelData.hasOwnProperty(data)) {
-                    entry[data] = modelData[data];
-                  }
+              var modelData = model.toJSON();
+              modelData[model.idAttribute] = modelData[model.idAttribute] || modelId;
+              for(var data in modelData) {
+                if (modelData.hasOwnProperty(data)) {
+                  entry[data] = modelData[data];
                 }
-                entries.save(function(err) {
-                  if (err) return errorHandler(err, options);
-                  model[model.idAttribute] = modelId;
-                  return successHandler(entry);
-                });
+              }
+              
+              entries.save(function(err) {
+                if (err) return errorHandler(err, options);
+                model[model.idAttribute] = modelId;
+                return successHandler(entry);
               });
             });
-          },
-          // Error:
-          function (err) {
-            return errorHandler(err, options);
           });
+        });
         break;
       case "update":
         session.load(containerName, function(err, entries) {
