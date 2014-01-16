@@ -65,6 +65,7 @@
             return;
           }
           window.app.session = session;
+          window.app.establishCounter();
           window.app.accountModel = new window.app.AccountModel({
             username: username,
             passphrase: passphrase,

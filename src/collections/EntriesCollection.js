@@ -7,8 +7,9 @@
     $           = window.Zepto;
 
   var EntriesCollection = Backbone.Collection.extend({
+    rootContainerID: "entries",
     initialize: function() {
-      this.container = "entries"; // default
+      this.container = this.rootContainerID; // default
       this.model = Encryptr.prototype.EntryModel; // default
     },
     fetch: function (options) {
@@ -27,6 +28,7 @@
     sync: function() {
       // ...
       console.log("@TODO: EntriesCollection.sync");
+      return Backbone.sync.apply(this, arguments);
     }
   });
 

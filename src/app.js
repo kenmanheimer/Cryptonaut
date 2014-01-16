@@ -100,6 +100,27 @@ var Encryptr = (function (window, console, undefined) {
     // ...
   };
 
+  /** Prepare session-unique counter for internal use by .getNewUnique().
+   *
+   * Depends on established login, specifically, window.app.session.
+   */
+  Encryptr.prototype.establishCounter = function () {
+    window.cryptonutils.loadOrCreateContainer(
+      "_uCounter",
+      window.app.session,
+      function (container) {
+        window.app._uCounter = container;
+        window.cryptonutils.getOrCreateSetting(
+          container, "counter", 1,
+          function (setting) {},
+          function (errmsg) {
+            console.log("Failed to set unique counter: " + errmsg);
+          });
+      },
+      function (errmsg) {
+        console.log("Failed to establish unique counter: " + errmsg);
+      });
+  };
   /** Return a new session-unique integer. */
   Encryptr.prototype.getNewUnique = function() {
     if (! window.app.session) {

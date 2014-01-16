@@ -59,6 +59,7 @@
           return;
         }
         window.app.session = session;
+        window.app.establishCounter();
         window.app.accountModel = new window.app.AccountModel({
           username: username,
           passphrase: passphrase,
@@ -70,27 +71,6 @@
             $(".blocker").hide();
             return;
           }
-          // Get the session-unique counter, and initialize it if necessary.
-          // It's for internal use by .getNewUnique().
-          window.cryptonutils.loadOrCreateContainer(
-            "_uCounter",
-            session,
-            function (container) {
-              window.app._uCounter = container;
-              window.cryptonutils.getOrCreateSetting(
-                container,
-                "counter",
-                1,
-                function (setting) {},
-                function (errmsg) {
-                  console.log("Failed to set unique counter: " + errmsg);
-                }
-              );
-            },
-            function (errmsg) {
-              console.log("Failed to establish unique counter: " + errmsg);
-            }
-          );
           // Set up MainView
           window.app.mainView = new window.app.MainView().render();
           // Push an EntriesView

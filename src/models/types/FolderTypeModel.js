@@ -14,6 +14,7 @@
       if (! this.contents) {
         this.contents = new Encryptr.prototype.EntriesCollection();
         this.contents.container = this.modelID;
+        this.contents.sync("create", this.contents);
       }
     },
     which: "FolderType"
