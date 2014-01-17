@@ -54,7 +54,9 @@
           return;
         }
         session.load(containerName, function(err, entries) {
-          if (err) return errorHandler(err, options);
+          if (err) {
+            return errorHandler(err, options);
+          }
           entries.get(model[model.idAttribute], function(err, entry) {
             return successHandler(entry);
           });
@@ -69,13 +71,14 @@
             entries.get(modelId, function(err, entry) {
               if (err) return errorHandler(err, options);
               var modelData = model.toJSON();
-              modelData[model.idAttribute] = modelData[model.idAttribute] || modelId;
+              modelData[model.idAttribute] = (modelData[model.idAttribute] ||
+                                              modelId);
               for(var data in modelData) {
                 if (modelData.hasOwnProperty(data)) {
                   entry[data] = modelData[data];
                 }
               }
-              
+
               entries.save(function(err) {
                 if (err) return errorHandler(err, options);
                 model[model.idAttribute] = modelId;

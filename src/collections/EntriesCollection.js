@@ -29,7 +29,8 @@
       // ...
       console.log("@TODO: EntriesCollection.sync");
       return Backbone.sync.apply(this, arguments);
-    }
+    },
+    which: "EntriesCollection"
   });
 
   Encryptr.prototype.EntriesCollection = EntriesCollection;
