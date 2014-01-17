@@ -71,7 +71,8 @@
             passphrase: passphrase,
             session: session
           });
-          window.app.session.create("entries", function(err, entries){
+          var rcID = window.app.EntriesCollection.prototype.rootContainerID;
+          window.app.session.create(rcID, function(err, entries){
             if (err) {
               navigator.notification.alert(err);
               $(".blocker").hide();
@@ -79,7 +80,7 @@
             }
             // Set up MainView
             window.app.mainView = new window.app.MainView().render();
-            // Push a ListView 
+            // Push an EntriesView
             window.app.navigator.pushView(
               window.app.EntriesView,
               { collection: new window.app.EntriesCollection() },

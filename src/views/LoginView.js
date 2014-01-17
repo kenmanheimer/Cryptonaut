@@ -65,7 +65,8 @@
           passphrase: passphrase,
           session: session
         });
-        session.load("entries", function(err, entries) {
+        var rcID = window.app.EntriesCollection.prototype.rootContainerID;
+        session.load(rcID, function(err, entries) {
           if (err) {
             navigator.notification.alert(err);
             $(".blocker").hide();
