@@ -103,8 +103,10 @@ var Encryptr = (function (window, console, undefined) {
   /** Prepare session-unique counter for internal use by .getNewUnique().
    *
    * Depends on established login, specifically, window.app.session.
+   *
+   * @param (deferred) ready (optional) .resolve()s when counter is ready.
    */
-  Encryptr.prototype.establishCounter = function () {
+  Encryptr.prototype.establishCounter = function (ready) {
     window.cryptonutils.loadOrCreateContainer(
       "_uCounter",
       window.app.session,
@@ -112,7 +114,11 @@ var Encryptr = (function (window, console, undefined) {
         window.app._uCounter = container;
         window.cryptonutils.getOrCreateSetting(
           container, "counter", 1,
-          function (setting) {},
+          function (setting) {
+            if (ready) {
+              ready.resolve();
+            }
+          },
           function (errmsg) {
             console.log("Failed to set unique counter: " + errmsg);
           });
