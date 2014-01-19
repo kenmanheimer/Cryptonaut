@@ -65,7 +65,7 @@
       case "create":
         session.load(containerName, function(err, entries) {
           if (err) return errorHandler(err, options);
-          var modelId = guid();
+          var modelId = model.modelId || guid();
           entries.add(modelId, function(err) {
             if (err) return errorHandler(err, options);
             entries.get(modelId, function(err, entry) {
