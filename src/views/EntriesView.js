@@ -40,6 +40,7 @@
       this.priorEntriesCollection = window.app.currentEntriesCollection;
       window.app.currentEntriesCollection = this.collection;
       this.collection.fetch();
+      this.addAll();
     },
     viewDeactivate: function(event) {
       // Reestablish prior entries collection. Will be superceded when
@@ -76,15 +77,16 @@
     a_clickHandler: function(event) {
       var _this = this,
           model = this.model,
-          contents = model.get("contents");
+          contentsId = model.get("contentsId");
       if (!$(".menu").hasClass("dismissed") ||
           !$(".addMenu").hasClass("dismissed")) {
         return;
       }
-      if (contents) {
+      if (contentsId) {
+        model.fetch();
         window.app.navigator.pushView(
           window.app.EntriesView,
-          {collection: contents},
+          {collection: model.contents},
           window.app.noEffect
         );
       }

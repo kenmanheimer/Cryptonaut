@@ -10,7 +10,7 @@
   /** FolderModel has features of an entry type, but is a real model. */
   var FolderModel = Backbone.Model.extend({
     defaults: {
-      contents: null,
+      contentsId: null,
       type: "Folder"
     },
     displayName: "Folder",
@@ -19,43 +19,35 @@
     initialize: function () {
       // XXX Probably should remove "folder:", to reduce server-exposed info.
       this.modelId = "folder:" + window.app.getNewUnique();
-      this.on("change", this.noteChange);
-    },
-    noteChange: function () {
-      if ((typeof(this.get("contents")) === "string") &&
-          this._previousAttributes.contents !== this.get("contents")) {
-        console.log(this.modelId + " contents changed to string");
-        this.fetch();
-      }
+      this.contents = null;
     },
     /** Intervene in save to create our contents container, if we lack it. */
-    save: function () {
-      var primaryArgs = arguments,
-          backboneSave = function () {
-            Backbone.Model.prototype.save.apply(this, primaryArgs);
-          }.bind(this);
-      if (! this.get("contents")) {
+    save: function (attrs, options) {
+      var thisFolder = this;
+      if (! thisFolder.contents) {
         var collection = new Encryptr.prototype.EntriesCollection();
         collection.model = FolderModel;
         collection.modelId = "folderCollection:" + window.app.getNewUnique();
         collection.container = collection.modelId;
-        this.set("contents", collection);
-        window.app.session.create(collection.container,
-                                  function (err, container) {
-                                    backboneSave();
-                                  });
+        thisFolder.contents = collection;
+        thisFolder.set("contentsId", collection.container);
+        var got = window.app.session.create(
+          collection.container,
+          function (err, container) {
+            Backbone.Model.prototype.save.call(thisFolder, attrs, options);
+          });
       }
       else {
-        backboneSave();
+        Backbone.Model.prototype.save.call(thisFolder, attrs, options);
       }
     },
     fetch: function (options) {
       /* Reconstitute our entry collection if what we have is just the ID. */
-      var contents = this.get("contents");
-      if (typeof(contents) === "string") {
+      if (! this.contents) {
+        var contentsId = this.get("contentsId");
         var collection = new Encryptr.prototype.EntriesCollection();
-        collection.container = contents;
-        this.set("contents", collection);
+        collection.container = contentsId;
+        this.contents = collection;
         collection.fetch({
           error: function(errmsg) {
             navigator.notification.alert(
@@ -65,22 +57,6 @@
           }
         });
       }
-    },
-    /** Return a representation ready for storing */
-    toJSON: function () {
-      var contents = this.get("contents"),
-          attributes = this.attributes,
-          dup = {};
-      if (! contents || typeof(contents) === "string") {
-        return Backbone.Model.prototype.toJSON.call(this);
-      }
-      _.extend(dup, this);
-      dup.attributes = {};
-      _.extend(dup.attributes, this.attributes);
-      // Replace dup "contents" with its' id, for externalization:
-      // (??? Using dup.set() triggers something that infinite loops)
-      dup.attributes.contents = contents.modelId;
-      return dup.toJSON();
     },
     which: "FolderModel"
   });

@@ -40,11 +40,6 @@
         );
       });
     },
-    sync: function() {
-      // ...
-      console.log("@TODO: EntriesCollection.sync");
-      return Backbone.sync.apply(this, arguments);
-    },
     which: "EntriesCollection"
   });
 
