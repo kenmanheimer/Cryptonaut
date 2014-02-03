@@ -87,7 +87,8 @@
     },
     close: function() {
       this.remove();
-    }
+    },
+    which: "MenuView"
   });
 
   Encryptr.prototype.MenuView = MenuView;

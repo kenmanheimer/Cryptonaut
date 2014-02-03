@@ -96,7 +96,8 @@
         view.close();
       });
       this.remove();
-    }
+    },
+    which: "editView"
   });
   Encryptr.prototype.EditView = EditView;
 
@@ -117,7 +118,8 @@
     },
     close: function() {
       this.remove();
-    }
+    },
+    which: "EditListItemView"
   });
   Encryptr.prototype.EditListItemView = EditListItemView;
 

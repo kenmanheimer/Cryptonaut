@@ -98,7 +98,8 @@
     },
     close: function() {
       this.remove();
-    }
+    },
+    which: "EntriesListItemView"
   });
   Encryptr.prototype.EntriesListItemView = EntriesListItemView;
 

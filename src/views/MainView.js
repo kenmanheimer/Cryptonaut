@@ -96,7 +96,8 @@
     close: function() {
       this.menuView.close();
       this.addMenuView.close();
-    }
+    },
+    which: "MainView"
   });
 
   Encryptr.prototype.MainView = MainView;

@@ -61,7 +61,8 @@
     },
     close: function() {
       this.remove();
-    }
+    },
+    which: "EntryView"
   });
   Encryptr.prototype.EntryView = EntryView;
 

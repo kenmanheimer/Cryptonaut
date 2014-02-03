@@ -119,7 +119,8 @@
     },
     enable: function() {
       this.$("input").removeAttr("disabled");
-    }
+    },
+    which: "LoginView"
   });
 
   Encryptr.prototype.LoginView = LoginView;

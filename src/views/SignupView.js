@@ -123,7 +123,8 @@
         _this.$el.removeClass("dismissed");
         _this.$el.animate({"-webkit-transform":"translate3d(0,0,0)"}, 250, "ease-in-out");
       }
-    }
+    },
+    which: "SignupView"
   });
 
   Encryptr.prototype.SignupView = SignupView;
