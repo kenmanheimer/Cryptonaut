@@ -52,7 +52,8 @@
         view.close();
       });
       this.remove();
-    }
+    },
+    which: "EntriesView"
   });
   Encryptr.prototype.EntriesView = EntriesView;
 
