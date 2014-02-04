@@ -50,7 +50,8 @@ p {
 }
  
 .nav .title {
-  position: absolute;
+  position: fixed;
+  display: inline;
   left: 80px;
   right: 80px;
   text-align: center;
@@ -79,7 +80,7 @@ p {
 }
  
 .nav .right {
-  position: absolute;
+  position: relative;
   right: 0;
   top: 0;
 }
@@ -91,7 +92,7 @@ p {
 }
  
 .nav .left {
-  position: absolute;
+  position: relative;
   left: 0;
   top: 0;
 }

@@ -10,6 +10,8 @@
     className: "menu",
     events: {
       "click .menu-back": "back_clickHandler",
+      "click .menu-edit": "edit_clickHandler",
+      "click .menu-delete": "delete_clickHandler",
       "click .menu-settings": "settings_clickHandler",
       "click .menu-logout": "logout_clickHandler"
     },
@@ -17,7 +19,9 @@
       _.bindAll(this,
                 "settings_clickHandler",
                 "logout_clickHandler",
-                "back_clickHandler");
+                "back_clickHandler",
+                "edit_clickHandler",
+                "delete_clickHandler");
     },
     render: function() {
       this.$el.html(window.tmpl["menuView"]({}));
@@ -32,6 +36,12 @@
       if (window.app.navigator.viewsStack.length > 1) {
         window.app.navigator.popView(window.app.defaultPopEffect);
       }
+    },
+    edit_clickHandler: function(event) {
+      $(document).trigger("editentry");
+    },
+    delete_clickHandler: function(event) {
+      $(document).trigger("deleteentry");
     },
     logout_clickHandler: function(event) {
       event.preventDefault();
@@ -61,14 +71,6 @@
       }
     },
     show: function() {
-      if (! window.app.currentEntriesCollection ||
-          (window.app.currentEntriesCollection.container ===
-           window.app.EntriesCollection.prototype.rootContainerID)) {
-        this.$('.menu-back-section').hide();
-      }
-      else {
-        this.$('.menu-back-section').show();
-      }
       if (this.$el.hasClass("dismissed")) {
         this.$el.removeClass("dismissed");
         this.$("input").removeAttr("disabled");

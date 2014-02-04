@@ -47,6 +47,7 @@
         var contentsId = this.get("contentsId");
         var collection = new Encryptr.prototype.EntriesCollection();
         collection.container = contentsId;
+        collection.folderModel = this;
         this.contents = collection;
         collection.fetch({
           error: function(errmsg) {
