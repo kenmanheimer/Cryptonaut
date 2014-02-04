@@ -49,11 +49,11 @@
                              this);
       window.app.mainView.on("editentry", this.editButton_clickHandler, this);
 
-      if (this.collection.folderModel) {
+      if (this.collection.theFolder) {
         $(".nav .back-btn").removeClass("hidden");
         $(".nav .edit-btn.right").removeClass("hidden");
         $(".nav .delete-btn").removeClass("hidden");
-        window.app.mainView.setTitle(this.collection.folderModel.get("label"));
+        window.app.mainView.setTitle(this.collection.theFolder.get("label"));
       }
       $(".nav .menu-btn").removeClass("hidden");
     },
@@ -62,7 +62,7 @@
       // another entries view is activated.
       window.app.currentEntriesCollection = this.priorEntriesCollection;
 
-      if (this.collection.folderModel) {
+      if (this.collection.theFolder) {
         $(".nav .back-btn").addClass("hidden");
         $(".nav .btn.right").addClass("hidden");
         $(".nav .delete-btn").addClass("hidden");
@@ -76,7 +76,7 @@
     editButton_clickHandler: function(event) {
       window.app.navigator.pushView(
         window.app.EditView,
-        {model: this.collection.folderModel},
+        {model: this.collection.theFolder},
         window.app.noEffect
       );
     },
@@ -85,7 +85,7 @@
       var message = ("Delete this folder, including contents?");
       navigator.notification.confirm(message, function(button) {
         if (button === 1) {
-          _this.collection.folderModel.destroy();
+          _this.collection.theFolder.destroy();
           window.app.navigator.popView(window.app.defaultPopEffect);
         }
       }, "Confirm delete");
