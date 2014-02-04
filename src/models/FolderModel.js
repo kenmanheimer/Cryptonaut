@@ -59,6 +59,15 @@
         });
       }
     },
+    destroy: function (options) {
+      // TODO: TEST THIS!  RECURSIVE: ensure crypton containers are deleted!!
+      // Ensure we have our collection, in so far as it's available:
+      this.fetch();
+      if (this.contents) {
+        this.contents.destroy();
+      }
+      Backbone.Model.prototype.destroy.call(this, options);
+    },
     which: "FolderModel"
   });
 

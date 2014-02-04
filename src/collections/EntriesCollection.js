@@ -40,6 +40,17 @@
         );
       });
     },
+    // There is no underlying collection.destroy().
+    destroy: function (options) {
+      // Ensure we have our crypton container, in so far as it's available:
+      this.fetch();
+      // Iterate over the contents, to dispatch on any contained folders:
+      this.forEach(function (entry) {
+        if (entry.get("contentsId")) {
+          entry.destroy(options);
+        }
+      });
+    },
     which: "EntriesCollection"
   });
 

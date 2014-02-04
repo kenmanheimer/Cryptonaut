@@ -23,7 +23,8 @@
     },
     render: function() {
       this.$el.html(window.tmpl["entriesView"]({}));
-      window.app.mainView.on("deleteentry", this.deleteButton_clickHandler, this);
+      window.app.mainView.on("deleteentry", this.deleteButton_clickHandler,
+                             this);
       window.app.mainView.once("editentry", this.editButton_clickHandler, this);
       return this;
     },
@@ -51,12 +52,8 @@
       if (this.collection.folderModel) {
         $(".nav .back-btn").removeClass("hidden");
         $(".nav .edit-btn.right").removeClass("hidden");
-        //XXX $(".nav .delete-btn").removeClass("hidden");
-        $(".nav .delete-btn").addClass("hidden");  // XXX
+        $(".nav .delete-btn").removeClass("hidden");
         window.app.mainView.setTitle(this.collection.folderModel.get("label"));
-      }
-      else {
-        $(".nav .btn.right").addClass("hidden");
       }
       $(".nav .menu-btn").removeClass("hidden");
     },
@@ -68,6 +65,7 @@
       if (this.collection.folderModel) {
         $(".nav .back-btn").addClass("hidden");
         $(".nav .btn.right").addClass("hidden");
+        $(".nav .delete-btn").addClass("hidden");
       }
       window.app.mainView.setTitle("Encryptr");
       $(".nav .menu-btn").removeClass("hidden");
@@ -84,10 +82,10 @@
     },
     deleteButton_clickHandler: function(event) {
       var _this = this;
-      var message = ("Delete this folder and ALL its contents?");
+      var message = ("Delete this folder, including contents?");
       navigator.notification.confirm(message, function(button) {
         if (button === 1) {
-          _this.model.destroy();
+          _this.collection.folderModel.destroy();
           window.app.navigator.popView(window.app.defaultPopEffect);
         }
       }, "Confirm delete");
