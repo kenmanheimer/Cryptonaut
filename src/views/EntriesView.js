@@ -76,7 +76,7 @@
       window.app.mainView.off("deleteentry", null, null);
     },
     editButton_clickHandler: function(event) {
-      window.app.navigator.replaceView(
+      window.app.navigator.pushView(
         window.app.EditView,
         {model: this.collection.folderModel},
         window.app.noEffect
