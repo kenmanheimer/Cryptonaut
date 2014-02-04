@@ -63,12 +63,17 @@
           window.app.navigator.popView(window.app.defaultPopEffect);
           $(".blocker").hide();
         },
-        error: function(err) {
+        error: function(model, resp, options) {
           $(".blocker").hide();
-          navigator.notification.alert(
-            err,
-            function() {},
-            "Error");
+          if (resp === "Container has not changed") {
+            // We don't yet have toasts, just ignore it.
+          }
+          else {
+            navigator.notification.alert(
+              resp,
+              function() {},
+              "Error");
+          }
         }
       });
     },
