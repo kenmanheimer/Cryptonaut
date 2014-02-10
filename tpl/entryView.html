@@ -4,6 +4,7 @@
 	<li><em>{{= it.type }}</em></li> -->
 	{{ _.each(it.items, function(item) { }}
 	{{? item.value }}<li class="sep">{{= item.key}}</li>
-	<li><a>{{= item.value }}</a></li>{{? }}
+	<li><a class="copyable">{{= item.value }}</a></li>{{? }}
 	{{ }); }}
 </ul>
+<div><p><small>Press and hold on a field to copy it to the clipboard</small></p></div>
