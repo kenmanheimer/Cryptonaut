@@ -71,12 +71,12 @@ p {
 }
 .nav .right {
   position: relative;
-  right: 0;
+  float: right;
   top: 0;
 }
 .nav .right2 {
-  position: absolute;
-  right: 44px;
+  position: relative;
+  float: right;
   top: 0;
 }
 .nav .left {
