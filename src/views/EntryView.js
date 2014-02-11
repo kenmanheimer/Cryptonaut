@@ -85,15 +85,14 @@
       window.app.mainView.setTitle(this.model.get("label"));
     },
     viewDeactivate: function(event) {
-      var mainView = window.app.mainView;
       //window.app.mainView.backButtonDisplay(false);
       $(".nav .back-btn").addClass("hidden");
       $(".nav .menu-btn").removeClass("hidden");
       $(".nav .btn.right").addClass("hidden");
       $(".nav .add-btn.right").removeClass("hidden");
-      mainView.setTitle("Cryptonaut");
-      mainView.off("editentry", null, null);
-      mainView.off("deleteentry", null, null);
+      window.app.mainView.setTitle("Cryptonaut");
+      window.app.mainView.off("editentry", null, null);
+      window.app.mainView.off("deleteentry", null, null);
     },
     close: function() {
       this.remove();

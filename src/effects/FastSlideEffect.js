@@ -1,4 +1,4 @@
-(function (window, Encryptr, undefined) {
+(function (window, Cryptonaut, undefined) {
   "use strict";
   var console = window.console || {};
   console.log = console.log || function(){};
@@ -6,7 +6,7 @@
       _           = window._,
       $           = window.$;
 
-  Encryptr.prototype.FastSlideEffect = window.BackStack.Effect.extend({
+  Cryptonaut.prototype.FastSlideEffect = window.BackStack.Effect.extend({
 
     direction:'left',
 
@@ -111,4 +111,4 @@
     }
   });
 
-})(this, this.Encryptr);
+})(this, this.Cryptonaut);

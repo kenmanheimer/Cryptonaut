@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -25,7 +25,7 @@
     },
     render: function() {
       var _this = this;
-      _this.signupView = new Encryptr.prototype.SignupView().render();
+      _this.signupView = new Cryptonaut.prototype.SignupView().render();
       _this.signupView.dismiss();
       window.setTimeout(function() {
         _this.signupView.$el.removeClass("hidden");
@@ -123,6 +123,6 @@
     which: "LoginView"
   });
 
-  Encryptr.prototype.LoginView = LoginView;
+  Cryptonaut.prototype.LoginView = LoginView;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

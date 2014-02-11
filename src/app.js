@@ -173,7 +173,9 @@ var Cryptonaut = (function (window, console, undefined) {
   };
 
   Cryptonaut.prototype.randomString = function(length) {
-    var charset = "!@#$%^&*()_+{}:<>?|,[];./~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charset = ("!@#$%^&*()_+{}:<>?|,[];./~" +
+                   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" +
+                   "0123456789");
     var i;
     var result = "";
     if(window.crypto && window.crypto.getRandomValues) {

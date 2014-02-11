@@ -1,5 +1,5 @@
 // FolderModel.js
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -14,7 +14,7 @@
       type: "Folder"
     },
     displayName: "Folder",
-    collection: Encryptr.prototype.EntriesCollection,
+    collection: Cryptonaut.prototype.EntriesCollection,
     contents: null,
     initialize: function () {
       // XXX Probably should remove "folder:", to reduce server-exposed info.
@@ -25,7 +25,7 @@
     save: function (attrs, options) {
       var thisFolder = this;
       if (! thisFolder.contents) {
-        var collection = new Encryptr.prototype.EntriesCollection();
+        var collection = new Cryptonaut.prototype.EntriesCollection();
         collection.model = FolderModel;
         collection.modelId = "folderCollection:" + window.app.getNewUnique();
         collection.container = collection.modelId;
@@ -45,7 +45,7 @@
       /* Reconstitute our entry collection if what we have is just the ID. */
       if (! this.contents) {
         var contentsId = this.get("contentsId");
-        var collection = new Encryptr.prototype.EntriesCollection();
+        var collection = new Cryptonaut.prototype.EntriesCollection();
         collection.container = contentsId;
         collection.theFolder = this;
         this.contents = collection;
@@ -71,9 +71,9 @@
     which: "FolderModel"
   });
 
-  Encryptr.prototype.FolderModel = FolderModel;
+  Cryptonaut.prototype.FolderModel = FolderModel;
 
-  Encryptr.prototype.types = Encryptr.prototype.types || {};
-  Encryptr.prototype.types.FolderModel = FolderModel;
+  Cryptonaut.prototype.types = Cryptonaut.prototype.types || {};
+  Cryptonaut.prototype.types.FolderModel = FolderModel;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -19,7 +19,7 @@
 
   CreditCardType.prototype.displayName = "Credit Card";
 
-  Encryptr.prototype.types = Encryptr.prototype.types || {};
-  Encryptr.prototype.types.CreditCardType = CreditCardType;
+  Cryptonaut.prototype.types = Cryptonaut.prototype.types || {};
+  Cryptonaut.prototype.types.CreditCardType = CreditCardType;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);
