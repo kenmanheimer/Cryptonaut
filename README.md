@@ -1,19 +1,12 @@
-Encryptr
-========
+Cryptonaut
+==========
+Explore and manipulate zero-knowledge, cloud-based [Crypton](https://crypton.io) key/value databases.
 
-[Encryptr](http://encryptr.devgeeks.org) is a zero-knowledge, cloud-based e-wallet / password manager powered by Crypton.
+Cryptonaut demonstrates a simple mapping of the fundamental [Backbone](http://backbonejs.org/) elements - collections and models - onto Crypton's corresponding containers and entries.  This mapping is handily deployed as a tool for navigation and manipulation of any Crypton data stores to which you have authorized access.
 
-It started as an example project for seeing what [Crypton](https://crypton.io) could do in a [Apache Cordova](http://cordova.apache.org) mobile app. I had a particular itch to scratch. I got tired of trynig to remember my work password. It changes fairly often, is slightly complex and is generated – I can't choose it for myself.
+The app infrastructure is shamelessly stolen from Tommy-Carols Williams [Encryptr](https://github.com/devgeeks/Encryptr).  We build upon his implementation, with the addition of Ken's folders work.
 
-I had tried a few password managers but hadn't loved any of them – particularly on Android. So, when I needed an idea of an app to make to try out Crypton, this seemed like an obvious choice. At its simplest, Crypton is basically a cloud based key/value store using end to end zero-knowledge encryption. None of the data stored on the server can be viewed by the server.
-
-I wanted something to store hard to remember passwords, important numbers, etc across devices. 
-
-Encryptr keeps it simple. It has three types of data it can store. Passwords, Credit Card numbers and general key/value pairs. It can easily be expanded to include other default entry types.
-
-It is currently working on iOS, Android, and the Desktop – thanks to [node-webkit](https://github.com/rogerwang/node-webkit) – but there are no reasons why it could not by expanded to Blackberry10 and Windows Phone 8.
-
-![screenshot](http://f.cl.ly/items/2n1r3V1D0L3k3p1q2T2O/encryptr-screenshot.png)
+It is currently aimed to work on iOS, Android, and the Desktop – thanks to [node-webkit](https://github.com/rogerwang/node-webkit) – but there are no reasons why it could not by expanded to Blackberry10 and Windows Phone 8.
 
 ## Requirements
 
@@ -65,4 +58,4 @@ See the steps taken for `grunt test` and `grunt debug:XXX` for the various opera
 
 
 ### License
-- GPLv3 – [https://github.com/devgeeks/Encryptr/blob/master/LICENSE](https://github.com/devgeeks/Encryptr/blob/master/LICENSE)
+- GPLv3 – [https://github.com/kenmanheimer/Cryptonaut/blob/master/LICENSE](https://github.com/kenmanheimer/Cryptonaut/blob/master/LICENSE)

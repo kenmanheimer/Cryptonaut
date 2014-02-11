@@ -46,15 +46,15 @@ describe('Application setup', function() {
   });
 
   describe('initialize', function() {
-    window.app = new window.Encryptr();
+    window.app = new window.Cryptonaut();
     beforeEach(function() {
       sinon.spy(window.app, "onDeviceReady");
     });
     afterEach(function() {
       window.app.onDeviceReady.restore();
     });
-    it('should have Encryptr', function() {
-      window.Encryptr.should.be.a('function');
+    it('should have Cryptonaut', function() {
+      window.Cryptonaut.should.be.a('function');
     });
     it('should have app', function() {
       window.app.should.be.an('object');

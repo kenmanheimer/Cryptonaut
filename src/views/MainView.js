@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -27,9 +27,9 @@
           "editButton_clickHandler",
           "deleteButton_clickHandler",
           "backButtonDisplay");
-      this.menuView = new Encryptr.prototype.MenuView().render();
+      this.menuView = new Cryptonaut.prototype.MenuView().render();
       this.menuView.dismiss();
-      this.addMenuView = new Encryptr.prototype.AddMenuView().render();
+      this.addMenuView = new Cryptonaut.prototype.AddMenuView().render();
       this.addMenuView.dismiss();
       this.$el.append(this.menuView.el);
       this.$el.append(this.addMenuView.el);
@@ -99,6 +99,6 @@
     }
   });
 
-  Encryptr.prototype.MainView = MainView;
+  Cryptonaut.prototype.MainView = MainView;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

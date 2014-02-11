@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -34,7 +34,7 @@
     },
     addOne: function(item) {
       var itemModel = new window.Backbone.Model(item);
-      var view = new Encryptr.prototype.EditListItemView({
+      var view = new Cryptonaut.prototype.EditListItemView({
         model: itemModel
       });
       this.$("ul.editable").append("<li class='sep'>" + itemModel.get("key") + "</li>");
@@ -86,7 +86,7 @@
       window.app.mainView.backButtonDisplay(false);
       $(".nav .btn.right").addClass("hidden");
       $(".nav .add-btn").removeClass("hidden");
-      window.app.mainView.setTitle("Encryptr");
+      window.app.mainView.setTitle("Cryptonaut");
       window.app.mainView.off("saveentry", null, null);
       window.app.mainView.off("editentry", null, null);
       window.app.mainView.off("deleteentry", null, null);
@@ -98,7 +98,7 @@
       this.remove();
     }
   });
-  Encryptr.prototype.EditView = EditView;
+  Cryptonaut.prototype.EditView = EditView;
 
   var EditListItemView = Backbone.View.extend({
     tagName: "li",
@@ -119,6 +119,6 @@
       this.remove();
     }
   });
-  Encryptr.prototype.EditListItemView = EditListItemView;
+  Cryptonaut.prototype.EditListItemView = EditListItemView;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

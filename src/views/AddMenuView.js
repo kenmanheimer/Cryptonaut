@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -16,7 +16,7 @@
     },
     render: function() {
       this.$el.html(window.tmpl["addMenuView"]({
-        types: Encryptr.prototype.types
+        types: Cryptonaut.prototype.types
       }));
       return this;
     },
@@ -65,6 +65,6 @@
     }
   });
 
-  Encryptr.prototype.AddMenuView = AddMenuView;
+  Cryptonaut.prototype.AddMenuView = AddMenuView;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

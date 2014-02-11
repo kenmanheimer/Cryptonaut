@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -121,6 +121,6 @@
     }
   });
 
-  Encryptr.prototype.SignupView = SignupView;
+  Cryptonaut.prototype.SignupView = SignupView;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

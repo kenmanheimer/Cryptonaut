@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -9,7 +9,7 @@
   var EntriesCollection = Backbone.Collection.extend({
     initialize: function() {
       this.container = "entries"; // default
-      this.model = Encryptr.prototype.EntryModel; // default
+      this.model = Cryptonaut.prototype.EntryModel; // default
     },
     fetch: function (options) {
       var _this = this;
@@ -28,6 +28,6 @@
     }
   });
 
-  Encryptr.prototype.EntriesCollection = EntriesCollection;
+  Cryptonaut.prototype.EntriesCollection = EntriesCollection;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

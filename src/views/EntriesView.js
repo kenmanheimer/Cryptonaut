@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -46,7 +46,7 @@
       } else {
         $(".emptyEntries").hide();
       }
-      var view = new Encryptr.prototype.EntriesListItemView({
+      var view = new Cryptonaut.prototype.EntriesListItemView({
         model: model
       });
       this.$("ul").append(view.render().el);
@@ -65,7 +65,7 @@
       this.remove();
     }
   });
-  Encryptr.prototype.EntriesView = EntriesView;
+  Cryptonaut.prototype.EntriesView = EntriesView;
 
   var EntriesListItemView = Backbone.View.extend({
     tagName: "li",
@@ -98,6 +98,6 @@
       this.remove();
     }
   });
-  Encryptr.prototype.EntriesListItemView = EntriesListItemView;
+  Cryptonaut.prototype.EntriesListItemView = EntriesListItemView;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.devgeeks.encryptr" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Encryptr</name>
+<widget id="org.myriadicity.cryptonaut" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Cryptonaut</name>
     <description>
-        A sample Apache Cordova application using Crypton.io.
+        A Crypton.io database explorer.
     </description>
-    <author email="tommy@devgeeks.org" href="http://devgeeks.org">
-        Tommy-Carlos Williams (devgeeks)
+    <author email="ken@myriadicity.net" href="http://myriadicity.net">
+      Ken Manheimer
     </author>
     <content src="index.html" />
     <access origin="https://crypton.io" subdomains="true" />
