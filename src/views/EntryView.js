@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -91,7 +91,7 @@
       $(".nav .menu-btn").removeClass("hidden");
       $(".nav .btn.right").addClass("hidden");
       $(".nav .add-btn.right").removeClass("hidden");
-      mainView.setTitle("Encryptr");
+      mainView.setTitle("Cryptonaut");
       mainView.off("editentry", null, null);
       mainView.off("deleteentry", null, null);
     },
@@ -100,6 +100,6 @@
     },
     which: "EntryView"
   });
-  Encryptr.prototype.EntryView = EntryView;
+  Cryptonaut.prototype.EntryView = EntryView;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

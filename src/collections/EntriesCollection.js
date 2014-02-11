@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -10,7 +10,7 @@
     rootContainerID: "entries",
     initialize: function() {
       this.container = this.rootContainerID; // default
-      this.model = Encryptr.prototype.EntryModel; // default
+      this.model = Cryptonaut.prototype.EntryModel; // default
     },
     fetch: function (options) {
       var _this = this;
@@ -29,7 +29,7 @@
           _.map(entries.keys, function(entry, key){
             var it;
             if (entry.type === "Folder") {
-              it = new Encryptr.prototype.FolderModel(entry);
+              it = new Cryptonaut.prototype.FolderModel(entry);
             }
             else {
               it = new _this.model(entry);
@@ -54,6 +54,6 @@
     which: "EntriesCollection"
   });
 
-  Encryptr.prototype.EntriesCollection = EntriesCollection;
+  Cryptonaut.prototype.EntriesCollection = EntriesCollection;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

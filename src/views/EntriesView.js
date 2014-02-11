@@ -1,4 +1,4 @@
-(function (window, console, Encryptr, undefined) {
+(function (window, console, Cryptonaut, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -49,7 +49,7 @@
       } else {
         $(".emptyEntries").hide();
       }
-      var view = new Encryptr.prototype.EntriesListItemView({
+      var view = new Cryptonaut.prototype.EntriesListItemView({
         model: model
       });
       this.$("ul").append(view.render().el);
@@ -83,7 +83,7 @@
         $(".nav .btn.right").addClass("hidden");
         $(".nav .delete-btn").addClass("hidden");
       }
-      window.app.mainView.setTitle("Encryptr");
+      window.app.mainView.setTitle("Cryptonaut");
       $(".nav .menu-btn").removeClass("hidden");
       $(".nav .add-btn.right").removeClass("hidden");
       window.app.mainView.off("editentry", null, null);
@@ -114,7 +114,7 @@
     },
     which: "EntriesView"
   });
-  Encryptr.prototype.EntriesView = EntriesView;
+  Cryptonaut.prototype.EntriesView = EntriesView;
 
   var EntriesListItemView = Backbone.View.extend({
     tagName: "li",
@@ -161,6 +161,6 @@
     },
     which: "EntriesListItemView"
   });
-  Encryptr.prototype.EntriesListItemView = EntriesListItemView;
+  Cryptonaut.prototype.EntriesListItemView = EntriesListItemView;
 
-})(this, this.console, this.Encryptr);
+})(this, this.console, this.Cryptonaut);

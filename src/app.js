@@ -1,4 +1,4 @@
-var Encryptr = (function (window, console, undefined) {
+var Cryptonaut = (function (window, console, undefined) {
   "use strict";
   console       = console || {};
   console.log   = console.log || function() {};
@@ -6,11 +6,11 @@ var Encryptr = (function (window, console, undefined) {
       _         = window._,
       $         = window.Zepto;
 
-  var Encryptr = function () {
+  var Cryptonaut = function () {
     this.online = true; // assume a hopeful default
   };
 
-  Encryptr.prototype.init = function() {
+  Cryptonaut.prototype.init = function() {
     window.document.addEventListener("deviceready", this.onDeviceReady, false);
     window.document.addEventListener("resume", this.onResume, false);
     window.document.addEventListener("pause", this.onPause, false);
@@ -45,7 +45,7 @@ var Encryptr = (function (window, console, undefined) {
     window.FastClick.attach(document.body);
   };
 
-  Encryptr.prototype.onDeviceReady = function(event) {
+  Cryptonaut.prototype.onDeviceReady = function(event) {
     if (window.device && window.device.platform === "iOS" && parseFloat(window.device.version) >= 7.0) {
       window.document.querySelectorAll(".app")[0].style.top = "20px"; // status bar hax
     }
@@ -53,45 +53,45 @@ var Encryptr = (function (window, console, undefined) {
       window.StatusBar.styleLightContent();
     }
     // Backstack effects
-    Encryptr.prototype.noEffect = new window.BackStack.NoEffect();
-    Encryptr.prototype.fadeEffect = new window.BackStack.FadeEffect();
-    Encryptr.prototype.defaultEffect = new window.BackStack.NoEffect();
-    Encryptr.prototype.defaultPopEffect = new window.BackStack.NoEffect();
+    Cryptonaut.prototype.noEffect = new window.BackStack.NoEffect();
+    Cryptonaut.prototype.fadeEffect = new window.BackStack.FadeEffect();
+    Cryptonaut.prototype.defaultEffect = new window.BackStack.NoEffect();
+    Cryptonaut.prototype.defaultPopEffect = new window.BackStack.NoEffect();
     if (window.device && window.device.platform === "iOS") {
-      Encryptr.prototype.defaultEffect = new Encryptr.prototype.FastSlideEffect();
-      Encryptr.prototype.defaultPopEffect = new Encryptr.prototype.FastSlideEffect({
+      Cryptonaut.prototype.defaultEffect = new Cryptonaut.prototype.FastSlideEffect();
+      Cryptonaut.prototype.defaultPopEffect = new Cryptonaut.prototype.FastSlideEffect({
         direction: "right"
       });
     }
-    window.document.addEventListener("backbutton", Encryptr.prototype.onBackButton, false);
-    window.document.addEventListener("menubutton", Encryptr.prototype.onMenuButton, false);
+    window.document.addEventListener("backbutton", Cryptonaut.prototype.onBackButton, false);
+    window.document.addEventListener("menubutton", Cryptonaut.prototype.onMenuButton, false);
 
     // Platform specific clipboard plugin / code
     if ($.os.ios || $.os.android) {
-      Encryptr.prototype.copyToClipboard = window.cordova.plugins.clipboard.copy;
+      Cryptonaut.prototype.copyToClipboard = window.cordova.plugins.clipboard.copy;
     } else if ($.os.bb10) {
-      Encryptr.prototype.copyToClipboard = window.community.clipboard.setText;
+      Cryptonaut.prototype.copyToClipboard = window.community.clipboard.setText;
     } else if ($.os.nodeWebkit && window.require ) { // How to *actually* detect node-webkit ?
       var gui = window.require('nw.gui');
       window.clipboard = gui.Clipboard.get();
-      Encryptr.prototype.copyToClipboard = function(text) {
+      Cryptonaut.prototype.copyToClipboard = function(text) {
         window.clipboard.set(text, 'text');
       };
     } else {
       // Fallback to empty browser polyfill
-      Encryptr.prototype.copyToClipboard = function() {};
+      Cryptonaut.prototype.copyToClipboard = function() {};
     }
   };
 
-  Encryptr.prototype.setOffline = function(event) {
+  Cryptonaut.prototype.setOffline = function(event) {
     this.online = false;
   };
 
-  Encryptr.prototype.setOnline = function(event) {
+  Cryptonaut.prototype.setOnline = function(event) {
     this.online = true;
   };
 
-  Encryptr.prototype.onResume = function(event) {
+  Cryptonaut.prototype.onResume = function(event) {
     // Throw up the login screen
     window.app.loginView.show();
     window.setTimeout(function() {
@@ -101,11 +101,11 @@ var Encryptr = (function (window, console, undefined) {
     },100);
   };
 
-  Encryptr.prototype.onPause = function(event) {
+  Cryptonaut.prototype.onPause = function(event) {
     // ...
   };
 
-  Encryptr.prototype.onBackButton = function(event) {
+  Cryptonaut.prototype.onBackButton = function(event) {
     if ($(".menu").is(":visible")) {
       window.app.mainView.menuView.dismiss();
       return;
@@ -121,7 +121,7 @@ var Encryptr = (function (window, console, undefined) {
     navigator.app.exitApp();
   };
 
-  Encryptr.prototype.onMenuButton = function(event) {
+  Cryptonaut.prototype.onMenuButton = function(event) {
     // ...
   };
 
@@ -131,7 +131,7 @@ var Encryptr = (function (window, console, undefined) {
    *
    * @param (deferred) ready (optional) .resolve()s when counter is ready.
    */
-  Encryptr.prototype.establishCounter = function (ready) {
+  Cryptonaut.prototype.establishCounter = function (ready) {
     window.cryptonutils.loadOrCreateContainer(
       "_uCounter",
       window.app.session,
@@ -153,7 +153,7 @@ var Encryptr = (function (window, console, undefined) {
       });
   };
   /** Return a new session-unique integer. */
-  Encryptr.prototype.getNewUnique = function() {
+  Cryptonaut.prototype.getNewUnique = function() {
     if (! window.app.session) {
       throw new Error("Session counter increment attempted without session");
     }
@@ -172,7 +172,7 @@ var Encryptr = (function (window, console, undefined) {
     return window.app._uCounter.keys.counter;
   };
 
-  Encryptr.prototype.randomString = function(length) {
+  Cryptonaut.prototype.randomString = function(length) {
     var charset = "!@#$%^&*()_+{}:<>?|,[];./~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     var i;
     var result = "";
@@ -186,6 +186,6 @@ var Encryptr = (function (window, console, undefined) {
     return result; // If you can't say something nice, don's say anything at all
   };
 
-  return Encryptr;
+  return Cryptonaut;
 
 })(this, this.console);
