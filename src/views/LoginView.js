@@ -66,26 +66,15 @@
           passphrase: passphrase,
           session: session
         });
-        var rcID = window.app.EntriesCollection.prototype.rootContainerID;
-        counterEstablished.done(function () {
-          session.load(rcID, function(err, entries) {
-            if (err) {
-              navigator.notification.alert(err);
-              $(".blocker").hide();
-              return;
-            }
-            // Set up MainView
-            window.app.mainView = new window.app.MainView().render();
-            // Push an EntriesView
-            window.app.navigator.pushView(
-              window.app.EntriesView,
-              { collection: new window.app.EntriesCollection() },
-              window.app.noEffect
-            );
-            $(".blocker").hide();
-            _this.dismiss();
-          });
-        });
+        window.app.mainView = new window.app.MainView().render();
+        var entriesCollection = new window.app.EntriesCollection();
+        window.app.navigator.pushView(
+          window.app.EntriesView,
+          { collection: entriesCollection },
+          window.app.noEffect
+        );
+        _this.dismiss();
+        $(".blocker").hide();
       });
     },
     loginButton_clickHandler: function(event) {

@@ -30,6 +30,7 @@
       return this;
     },
     addAll: function () {
+      this.$(".entriesViewLoading").removeClass("loadingEntries");
       if (this.collection.models.length === 0) {
         window.setTimeout(function() {
           $(".emptyEntries").show();
@@ -37,11 +38,12 @@
       } else {
         $(".emptyEntries").hide();
       }
-      this.$("ul").html("<li class='sep'>Entries</li>");
+      this.$(".entries").html("");
       this.collection.each(this.addOne);
     },
     addOne: function(model) {
       $(".emptyEntries").hide();
+      this.$(".entriesViewLoading").removeClass("loadingEntries");
       if (this.collection.models.length === 0) {
         window.setTimeout(function() {
           $(".emptyEntries").show();
@@ -52,24 +54,33 @@
       var view = new Cryptonaut.prototype.EntriesListItemView({
         model: model
       });
-      this.$("ul").append(view.render().el);
+      this.$(".entries").append(view.render().el);
       this.subViews.push(view);
     },
     viewActivate: function(event) {
-      this.priorEntriesCollection = window.app.currentEntriesCollection;
-      window.app.currentEntriesCollection = this.collection;
-      this.collection.fetch();
-      this.addAll();
+      var _this = this;
+      _this.priorEntriesCollection = window.app.currentEntriesCollection;
+      window.app.currentEntriesCollection = _this.collection;
+      this.collection.fetch({
+        success: function(entries) {
+          if (entries.length === 0) {
+            _this.addAll();
+          }
+        }, error: function(err) {
+          console.log(err); // @TODO: Handle this error
+        }
+      });
 
-      window.app.mainView.on("deleteentry", this.deleteButton_clickHandler,
-                             this);
-      window.app.mainView.on("editentry", this.editButton_clickHandler, this);
+      window.app.mainView.on("deleteentry", _this.deleteButton_clickHandler,
+                             _this);
+      window.app.mainView.on("editentry", _this.editButton_clickHandler,
+                             _this);
 
-      if (this.collection.theFolder) {
+      if (_this.collection.theFolder) {
         $(".nav .back-btn").removeClass("hidden");
         $(".nav .edit-btn.right").removeClass("hidden");
         $(".nav .delete-btn").removeClass("hidden");
-        window.app.mainView.setTitle(this.collection.theFolder.get("label"));
+        window.app.mainView.setTitle(_this.collection.theFolder.get("label"));
       }
       $(".nav .menu-btn").removeClass("hidden");
     },

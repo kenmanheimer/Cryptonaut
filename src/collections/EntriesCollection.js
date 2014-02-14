@@ -16,15 +16,7 @@
       var _this = this;
       var container = (options && options.container) || this.container;
       window.app.session.load(container, function(err, entries) {
-        if (err) {
-          if (options && options.error) {
-            options.error(err);
-          }
-          else {
-            console.log("EntriesCollection.fetch(): " + err);
-          }
-          return;
-        }
+        if (options && options.error && err) options.error(err);
         _this.set(
           _.map(entries.keys, function(entry, key){
             var it;
@@ -38,6 +30,7 @@
             return it;
           })
         );
+        if (options && options.success) options.success(_this);
       });
     },
     // There is no underlying collection.destroy().
