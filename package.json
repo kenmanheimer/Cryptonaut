@@ -2,6 +2,8 @@
   "name": "Cryptonaut",
   "version": "0.1.0",
   "main": "www/js/Cryptonaut.js",
+  "repository": "https://github.com/kenmanheimer/Cryptonaut.git",
+  "main": "www/js/Cryptonaut.js",
   "scripts": {
     "test": "grunt test",
     "postinstall": "./node_modules/.bin/bower install",
@@ -36,6 +38,7 @@
     "sinon-chai": "~2.4.0",
     "chai-jquery": "~1.1.2",
     "mocha-phantomjs": "~2.0.0",
-    "grunt-contrib-copy": "~0.5.0"
+    "grunt-contrib-copy": "~0.5.0",
+    "cordova": "~3.3.1-0.4.2"
   }
 }
