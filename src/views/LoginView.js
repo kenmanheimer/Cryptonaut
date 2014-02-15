@@ -59,22 +59,33 @@
           return;
         }
         window.app.session = session;
-        var counterEstablished = $.Deferred();
-        window.app.establishCounter(counterEstablished);
         window.app.accountModel = new window.app.AccountModel({
           username: username,
           passphrase: passphrase,
           session: session
         });
-        window.app.mainView = new window.app.MainView().render();
-        var entriesCollection = new window.app.EntriesCollection();
-        window.app.navigator.pushView(
-          window.app.EntriesView,
-          { collection: entriesCollection },
-          window.app.noEffect
-        );
-        _this.dismiss();
-        $(".blocker").hide();
+        var counterEstablished = $.Deferred();
+        window.app.establishCounter(counterEstablished);
+        counterEstablished.done(function () {
+          session.load(window.app.EntriesCollection.prototype.rootContainerID,
+                       function(err, entries) {
+            if (err) {
+              navigator.notification.alert(err);
+              $(".blocker").hide();
+              return;
+            }
+            // Set up MainView
+            window.app.mainView = new window.app.MainView().render();
+            // Push an EntriesView
+            window.app.navigator.pushView(
+              window.app.EntriesView,
+              { collection: new window.app.EntriesCollection() },
+              window.app.noEffect
+            );
+            $(".blocker").hide();
+            _this.dismiss();
+          });
+        });
       });
     },
     loginButton_clickHandler: function(event) {
