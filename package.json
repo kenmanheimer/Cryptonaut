@@ -25,7 +25,9 @@
     "bower": ">=1.8.8",
     "grunt-cli": "0.1.x",
     "grunt-contrib-jshint": "~0.4.3",
-    "grunt": "0.4.x",
+    # This may well break the build process. Necessary to mitigate CVE-2020-7729.
+    # Cryptonaut/security/dependabot/package.json/grunt/open
+    "grunt": "1.3.0"
     "grunt-contrib-concat": "~0.2.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.3.1",
